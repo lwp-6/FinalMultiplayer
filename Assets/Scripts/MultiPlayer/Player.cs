@@ -15,6 +15,9 @@ public class Player : MonoBehaviour, IDamage
     public Image ScreenFlashImage;
     public float FlashTime;
     public Color FlashColor;
+
+    public Transform LifeNum;
+
     private Color OriginColor;
 
     public static event Action<float> Respawn;
@@ -22,6 +25,9 @@ public class Player : MonoBehaviour, IDamage
     private PhotonView photonView;
     private GameObject GlobalCamera;
     private int maxHealth;
+
+    private Image[] LifeTransforms;
+    private BattleRoomManager battleRoomManager;
 
     // Start is called before the first frame update
     private void Start()
@@ -38,17 +44,26 @@ public class Player : MonoBehaviour, IDamage
             }
         }
 
+        // 玩家生命数量初始化
+        battleRoomManager = FindObjectOfType<BattleRoomManager>();
+        LifeTransforms = LifeNum.GetComponentsInChildren<Image>();
+
+        for (int i = 0; i < battleRoomManager.life; ++i)
+        {
+            LifeTransforms[i].color = new Color(255, 255, 255, 255);
+        }
+
     }
 
     // debug
-    /*private void Update()
+    private void Update()
     {
         if (Input.GetKey(KeyCode.L))
         {
-            //TakeDamage(10);
-            Debug.Log(GlobleVar.isPause);
+            TakeDamage(10);
+            //Debug.Log(GlobleVar.isPause);
         }
-    }*/
+    }
 
     public void TakeDamage(int damage)
     {
@@ -76,8 +91,11 @@ public class Player : MonoBehaviour, IDamage
             {
                 GlobalCamera.SetActive(true);   
             }
-            Respawn?.Invoke(3);
-
+            if (battleRoomManager.life > 0)
+            {
+                Respawn?.Invoke(3);
+                battleRoomManager.life--;
+            }
             return;
         }
         Health -= damage;

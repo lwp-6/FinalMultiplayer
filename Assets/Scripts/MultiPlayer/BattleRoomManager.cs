@@ -9,13 +9,14 @@ public class BattleRoomManager : MonoBehaviour
 
     private Transform[] RespawnPoints;
     private int RespawnIndex;
-
+    public int life;
     private void Start()
     {
         StartSpawn(0);
         Player.Respawn += StartSpawn;
 
         RespawnPoints = transform.GetComponentsInChildren<Transform>();
+        life = 3;
     }
 
     /*private void Update()
@@ -43,4 +44,5 @@ public class BattleRoomManager : MonoBehaviour
         // 生成角色
         PhotonNetwork.Instantiate(PlayerPrefabName, RespawnPoints[RespawnIndex].position, Quaternion.identity);
     }
+
 }
