@@ -8,6 +8,7 @@ public class BattleRoomManager : MonoBehaviour
     public string PlayerPrefabName;
 
     private Transform[] RespawnPoints;
+    private int RespawnIndex;
 
     private void Start()
     {
@@ -38,8 +39,8 @@ public class BattleRoomManager : MonoBehaviour
     private IEnumerator WaitToInstantiatePlayer(float timeToSpawn)
     {
         yield return new WaitForSeconds(timeToSpawn);
-
+        RespawnIndex = Random.Range(0, 8);
         // 生成角色
-        PhotonNetwork.Instantiate(PlayerPrefabName, transform.position, Quaternion.identity);
+        PhotonNetwork.Instantiate(PlayerPrefabName, RespawnPoints[RespawnIndex].position, Quaternion.identity);
     }
 }
