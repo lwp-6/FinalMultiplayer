@@ -91,10 +91,11 @@ public class Player : MonoBehaviour, IDamage
             {
                 GlobalCamera.SetActive(true);   
             }
-            if (battleRoomManager.life > 0)
+            
+            battleRoomManager.life--;
+            if (battleRoomManager.life >= 0)
             {
                 Respawn?.Invoke(3);
-                battleRoomManager.life--;
             }
             return;
         }
