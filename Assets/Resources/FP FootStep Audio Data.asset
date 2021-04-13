@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5e8cb8a9182f754ea82b63d519a8325, type: 3}
+  m_Name: FP FootStep Audio Data
+  m_EditorClassIdentifier: Assembly-CSharp::NewBehaviourScript
+  FootStepAudios:
+  - AudioClips:
+    - {fileID: 8300000, guid: 5ac86ac5747770349a6c124f36d233e1, type: 3}
+    Tag: walking
+    Delay: 4
+  - AudioClips:
+    - {fileID: 8300000, guid: 8a49c532c25ef274781a01f02cd8b425, type: 3}
+    Tag: running
+    Delay: 3

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7c696883eeea1e4581ae4baf254b8f8, type: 3}
+  m_Name: New Map Models Scriptable Object
+  m_EditorClassIdentifier: 
+  MapModels:
+  - MapName: Map1
+    MapSprite: {fileID: 21300000, guid: cfa42036e11d92541b9d0f76d8a86c61, type: 3}
+  - MapName: Map2
+    MapSprite: {fileID: 21300000, guid: d12f9350e2b99b041b28f8714a37b6ef, type: 3}
