@@ -26,6 +26,8 @@ public class Player : MonoBehaviour, IDamage
     private GameObject GlobalCamera;
     private int maxHealth;
 
+    private GameObject GlobalCanvas;
+
     private Image[] LifeTransforms;
     private BattleRoomManager battleRoomManager;
 
@@ -41,6 +43,12 @@ public class Player : MonoBehaviour, IDamage
             if (GlobalCamera != null)
             {
                 GlobalCamera.SetActive(false);
+            }
+
+            GlobalCanvas = GameObject.FindWithTag("GlobalCanvas");
+            if (GlobalCanvas != null)
+            {
+                GlobalCanvas.SetActive(false);
             }
         }
 
@@ -67,7 +75,7 @@ public class Player : MonoBehaviour, IDamage
 
     public void TakeDamage(int damage)
     {
-        Debug.Log("takeDamage");
+        //Debug.Log("takeDamage");
 
         if (GlobleVar.isOnline)
         {
@@ -91,7 +99,12 @@ public class Player : MonoBehaviour, IDamage
             {
                 GlobalCamera.SetActive(true);   
             }
-            
+
+            if (GlobalCanvas != null)
+            {
+                GlobalCanvas.SetActive(true);
+            }
+
             battleRoomManager.life--;
             if (battleRoomManager.life >= 0)
             {

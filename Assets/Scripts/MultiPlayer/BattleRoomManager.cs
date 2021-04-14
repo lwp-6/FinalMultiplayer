@@ -2,14 +2,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BattleRoomManager : MonoBehaviour
 {
     public string PlayerPrefabName;
+    public Text CountDownText;
 
+    public int life;
     private Transform[] RespawnPoints;
     private int RespawnIndex;
-    public int life;
+    
     private void Start()
     {
         StartSpawn(0);
@@ -18,14 +21,6 @@ public class BattleRoomManager : MonoBehaviour
         RespawnPoints = transform.GetComponentsInChildren<Transform>();
         life = 3;
     }
-
-    /*private void Update()
-    {
-        if (Input.GetKey(KeyCode.O))
-        {
-            Debug.Log();
-        }
-    }*/
 
     private void OnDisable()
     {
@@ -39,7 +34,16 @@ public class BattleRoomManager : MonoBehaviour
 
     private IEnumerator WaitToInstantiatePlayer(float timeToSpawn)
     {
-        yield return new WaitForSeconds(timeToSpawn);
+        CountDownText.gameObject.SetActive(true);
+        while (timeToSpawn > 0)
+        {
+            yield return new WaitForSeconds(1.0f);
+            timeToSpawn--;
+            CountDownText.text = timeToSpawn.ToString();
+        }
+        CountDownText.gameObject.SetActive(false);
+
+        yield return null;
         RespawnIndex = Random.Range(0, 8);
         // 生成角色
         PhotonNetwork.Instantiate(PlayerPrefabName, RespawnPoints[RespawnIndex].position, Quaternion.identity);

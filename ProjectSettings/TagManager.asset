@@ -11,6 +11,7 @@ TagManager:
   - EnemyRoom2
   - GlobalCamera
   - ClientCanvas
+  - GlobalCanvas
   layers:
   - Default
   - TransparentFX
