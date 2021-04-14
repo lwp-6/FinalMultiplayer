@@ -130,6 +130,7 @@ public class Player : MonoBehaviour, IDamage
     {
         StartCoroutine(Flash());
     }
+
     // 受伤屏幕闪烁协程
     IEnumerator Flash()
     {

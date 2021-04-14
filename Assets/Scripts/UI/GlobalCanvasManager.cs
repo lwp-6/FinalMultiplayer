@@ -47,6 +47,21 @@ public class GlobalCanvasManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             FailMenu.SetActive(true);
+            StartCoroutine(WaitToMainMenu());
+        }
+    }
+
+    private IEnumerator WaitToMainMenu()
+    {
+        yield return new WaitForSeconds(3);
+
+        SceneManager.LoadScene("MenuScene");
+        ObjectPool.GetInstance().ClearObjectPool();
+
+        if (GlobleVar.isJoinRoom)
+        {
+            PhotonNetwork.LeaveRoom();
+            GlobleVar.isJoinRoom = false;
         }
     }
 }

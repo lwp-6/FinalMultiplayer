@@ -48,6 +48,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         ExitGames.Client.Photon.Hashtable tmp_RoomProperties = new ExitGames.Client.Photon.Hashtable();
         tmp_RoomProperties.Add("psw", password);
         tmp_RoomProperties.Add("Map", mapName);
+        tmp_RoomProperties.Add("isPlaying", false);
         Debug.Log(tmp_RoomProperties);
         PhotonNetwork.CreateRoom(roomName,
             new RoomOptions
@@ -55,7 +56,7 @@ public class Launcher : MonoBehaviourPunCallbacks
                 MaxPlayers = playerCount,
                 PublishUserId = true,
                 CustomRoomProperties = tmp_RoomProperties,
-                CustomRoomPropertiesForLobby = new[] {"psw", "Map"}
+                CustomRoomPropertiesForLobby = new[] {"psw", "Map", "isPlaying"}
             },
             TypedLobby.Default);
     }

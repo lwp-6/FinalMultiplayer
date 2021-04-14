@@ -20,6 +20,7 @@ public class UIRoomListManager : MonoBehaviourPunCallbacks
         base.OnRoomListUpdate(roomList);
         foreach(RoomInfo roomInfo in roomList)
         {
+            // 房间删除
             if (roomInfo.RemovedFromList)
             {
                 if (roomInfoDictionary.ContainsKey(roomInfo.Name))
@@ -30,12 +31,20 @@ public class UIRoomListManager : MonoBehaviourPunCallbacks
                 return;
             }
 
+            // 更新已有房间信息
             if (roomInfoDictionary.ContainsKey(roomInfo.Name))
-            {
+            {                
+                if (roomInfo.PlayerCount == roomInfo.MaxPlayers || 
+                    (bool)roomInfoDictionary[roomInfo.Name].CustomProperties["isPlaying"])
+                {
+                    roomInfo.CustomProperties["isPlaying"] = true;
+                }
                 roomInfoDictionary[roomInfo.Name] = roomInfo;
+
                 continue;
             }
 
+            // 新增房间
             roomInfoDictionary.Add(roomInfo.Name, roomInfo);
             OnRoomAdded?.Invoke(roomInfo);
         }

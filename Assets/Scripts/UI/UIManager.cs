@@ -37,6 +37,7 @@ public class UIManager : MonoBehaviour
     public GameObject PasswordInput;
     public Text WrongPsssword;
     public Text RoomPlayerFull;
+    public Text RoomPlaying;
 
     public Launcher launcher;
 
@@ -57,6 +58,7 @@ public class UIManager : MonoBehaviour
         CancelCreateGameButton.onClick.AddListener(() => {
             CreateGamePanelAnimator.SetTrigger("FadeOut");
             MenuItemCanvasGroup.interactable = true;
+
         });
         // 弹出加入房间菜单
         JoinGameButton.onClick.AddListener(() => {
@@ -69,6 +71,11 @@ public class UIManager : MonoBehaviour
             MenuItemCanvasGroup.interactable = true;
             SelectedRoomName.text = null;
             SelectedMapImage.sprite = null;
+
+            // 恢复
+            RoomPlayerFull.gameObject.SetActive(false);
+            RoomPlaying.gameObject.SetActive(false);
+            ComfirmJoinGameButton.gameObject.SetActive(true);
         });
         // 确认创建房间
         ConfirmCreateGameButton.onClick.AddListener(() =>
@@ -130,11 +137,24 @@ public class UIManager : MonoBehaviour
         {
             ComfirmJoinGameButton.gameObject.SetActive(false);
             RoomPlayerFull.gameObject.SetActive(true);
+            return;
         }
         else
         {
             ComfirmJoinGameButton.gameObject.SetActive(true);
             RoomPlayerFull.gameObject.SetActive(false);
+        }
+
+        // 房间游戏中
+        if ((bool)roomInfo.CustomProperties["isPlaying"])
+        {
+            ComfirmJoinGameButton.gameObject.SetActive(false);
+            RoomPlaying.gameObject.SetActive(true);
+        }
+        else
+        {
+            ComfirmJoinGameButton.gameObject.SetActive(true);
+            RoomPlaying.gameObject.SetActive(false);
         }
     }
 
