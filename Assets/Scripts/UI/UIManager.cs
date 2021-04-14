@@ -115,7 +115,7 @@ public class UIManager : MonoBehaviour
 
     public void SetSelectedRoomDetails(RoomInfo roomInfo)
     {
-        //Debug.Log(roomInfo.CustomProperties);
+        Debug.Log(roomInfo.CustomProperties);
         var tmp_MatchModels = MapModelsScriptableObject.MapModels.Find(mapModel => {
             return mapModel.MapName.CompareTo(roomInfo.CustomProperties["Map"]) == 0;
         });
@@ -124,7 +124,6 @@ public class UIManager : MonoBehaviour
         SelectedroomPassword = (string)roomInfo.CustomProperties["psw"];
         if ((string)roomInfo.CustomProperties["psw"] != "")
         {
-
             PasswordInput.SetActive(true);
         }
         else
@@ -135,6 +134,7 @@ public class UIManager : MonoBehaviour
         // 玩家人数上限
         if (roomInfo.PlayerCount == roomInfo.MaxPlayers)
         {
+            //PhotonNetwork.CurrentRoom.IsOpen = false;
             ComfirmJoinGameButton.gameObject.SetActive(false);
             RoomPlayerFull.gameObject.SetActive(true);
             return;
@@ -145,8 +145,8 @@ public class UIManager : MonoBehaviour
             RoomPlayerFull.gameObject.SetActive(false);
         }
 
-        // 房间游戏中
-        if ((bool)roomInfo.CustomProperties["isPlaying"])
+        // 房间游戏中(不开放)
+        if (!roomInfo.IsOpen)
         {
             ComfirmJoinGameButton.gameObject.SetActive(false);
             RoomPlaying.gameObject.SetActive(true);

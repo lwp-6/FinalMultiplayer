@@ -20,6 +20,12 @@ public class BattleRoomManager : MonoBehaviour
 
         RespawnPoints = transform.GetComponentsInChildren<Transform>();
         life = 3;
+
+        // 判断房间满人
+        if (PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CurrentRoom.MaxPlayers)
+        {
+            PhotonNetwork.CurrentRoom.IsOpen = false;
+        }
     }
 
     private void OnDisable()

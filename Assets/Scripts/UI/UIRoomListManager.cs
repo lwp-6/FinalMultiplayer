@@ -34,13 +34,7 @@ public class UIRoomListManager : MonoBehaviourPunCallbacks
             // 更新已有房间信息
             if (roomInfoDictionary.ContainsKey(roomInfo.Name))
             {                
-                if (roomInfo.PlayerCount == roomInfo.MaxPlayers || 
-                    (bool)roomInfoDictionary[roomInfo.Name].CustomProperties["isPlaying"])
-                {
-                    roomInfo.CustomProperties["isPlaying"] = true;
-                }
                 roomInfoDictionary[roomInfo.Name] = roomInfo;
-
                 continue;
             }
 

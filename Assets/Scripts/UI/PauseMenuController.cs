@@ -23,7 +23,7 @@ public class PauseMenuController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bool isGameOver = GameOverMenuTransform.gameObject.activeSelf;
+        bool isGameOver = GameOverMenuTransform.gameObject.activeSelf || FinishMenuTransform.gameObject.activeSelf;
         if (Input.GetKeyDown(KeyCode.Escape) && !isGameOver)
         {
             GlobleVar.isPause = !GlobleVar.isPause;
@@ -44,6 +44,9 @@ public class PauseMenuController : MonoBehaviour
         // 解锁鼠标
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+
+        //
+        PauseMenuTransform.gameObject.SetActive(false);
     }
 
     // 玩家死亡，

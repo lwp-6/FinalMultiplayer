@@ -17,6 +17,7 @@ public class Player : MonoBehaviour, IDamage
     public Color FlashColor;
 
     public Transform LifeNum;
+    public PauseMenuController pauseMenuController;
 
     private Color OriginColor;
 
@@ -70,6 +71,22 @@ public class Player : MonoBehaviour, IDamage
         {
             TakeDamage(10);
             //Debug.Log(GlobleVar.isPause);
+        }
+
+        if (PhotonNetwork.CurrentRoom.PlayerCount == 1 && !PhotonNetwork.CurrentRoom.IsOpen)
+        {
+            StartCoroutine(isVictrory());
+        }
+    }
+
+    // 判断胜利
+    private IEnumerator isVictrory()
+    {
+        yield return new WaitForSeconds(4);
+
+        if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
+        {
+            pauseMenuController.FinishMenu();
         }
     }
 
