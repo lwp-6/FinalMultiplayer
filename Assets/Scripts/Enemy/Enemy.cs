@@ -53,7 +53,7 @@ public abstract class Enemy : MonoBehaviour
 
     //****** 敌人状态 *******//
     protected abstract void Died();
-    protected abstract void Reload();
+    //protected abstract void Reload();
     protected abstract void Attack();
     public abstract void Damage();
     protected abstract void Chase();

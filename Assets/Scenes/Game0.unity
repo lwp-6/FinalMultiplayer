@@ -14311,7 +14311,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1262047222378714495}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 92e6ab3734a157644a19270aaa69186f, type: 3}
   m_Name: 
@@ -14321,6 +14321,8 @@ MonoBehaviour:
   ScreenFlashImage: {fileID: 2513478018451293670}
   FlashTime: 0.25
   FlashColor: {r: 1, g: 0.2509804, b: 0.2509804, a: 0.2901961}
+  LifeNum: {fileID: 0}
+  pauseMenuController: {fileID: 0}
 --- !u!23 &207427390783484665
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -61169,6 +61171,7 @@ MonoBehaviour:
   - {fileID: 2002735973935472521}
   - {fileID: 2002041230846958697}
   FPArms: {fileID: 1262821465798116441}
+  canvas: {fileID: 0}
 --- !u!4 &5005260483084928337
 Transform:
   m_ObjectHideFlags: 0

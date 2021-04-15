@@ -15,11 +15,13 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
+        PhotonNetwork.NetworkingClient.LoadBalancingPeer.SerializationProtocolType = ExitGames.Client.Photon.SerializationProtocol.GpBinaryV16;
         if (!GlobleVar.isOnline)
         {
             ConnectToMaster();
         }
         loadingController = GetComponentInChildren<LoadingController>();
+        
     }
 
     private void Update()
@@ -35,7 +37,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     public void ConnectToMaster()
     {
         PhotonNetwork.ConnectUsingSettings();
-        PhotonNetwork.GameVersion = "Alpha";
+        //PhotonNetwork.GameVersion = "Alpha";
     }
 
     public void CreateRoom(string roomName, byte playerCount, string password, string mapName)
@@ -58,6 +60,8 @@ public class Launcher : MonoBehaviourPunCallbacks
                 CustomRoomPropertiesForLobby = new[] { "psw", "Map" }
             },
             TypedLobby.Default);
+
+        Application.runInBackground = true;
     }
 
     public void JoinRoom()

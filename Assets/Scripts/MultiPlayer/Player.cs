@@ -155,4 +155,5 @@ public class Player : MonoBehaviour, IDamage
         yield return new WaitForSeconds(FlashTime);
         ScreenFlashImage.color = OriginColor;
     }
+
 }

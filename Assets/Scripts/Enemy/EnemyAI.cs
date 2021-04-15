@@ -202,12 +202,12 @@ public class EnemyAI : Enemy
         shootAudioSource.Play();
 
         // 子弹数量
-        AmmoInMag--;
+        /*AmmoInMag--;
         if (AmmoInMag <= 0)
         {
             Invoke("Reload", 0.3f);
             //Reload();
-        }
+        }*/
     }
     protected override void Chase()
     {
@@ -341,7 +341,7 @@ public class EnemyAI : Enemy
         return tmp_Bullet;
     }
 
-    protected override void Reload()
+    /*protected override void Reload()
     {
         isDamage = false;
         EnemyAnimator.Play("Reload");
@@ -368,7 +368,7 @@ public class EnemyAI : Enemy
                 }
             }
         }
-    }
+    }*/
 
     // 判断射击动画结束
     private IEnumerator CheckShootAmmoAnimationEnd()
@@ -377,7 +377,7 @@ public class EnemyAI : Enemy
         {
             yield return null;
             var StateInfo = EnemyAnimator.GetCurrentAnimatorStateInfo(0);
-            // 获取换弹动画状态
+            // 获取动画状态
             if (StateInfo.IsName("Shoot"))
             {
                 if (StateInfo.normalizedTime >= 0.9f)

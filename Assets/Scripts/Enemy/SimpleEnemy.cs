@@ -45,10 +45,10 @@ public class SimpleEnemy : Enemy
         throw new System.NotImplementedException();
     }
 
-    protected override void Reload()
+    /*protected override void Reload()
     {
         throw new System.NotImplementedException();
-    }
+    }*/
 
     protected override void Attack()
     {

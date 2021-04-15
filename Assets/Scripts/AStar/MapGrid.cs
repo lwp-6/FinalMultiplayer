@@ -58,7 +58,7 @@ public class MapGrid : MonoBehaviour
     void Awake()
     {
         //LayerMask mask = 1 << 8;
-        NodeWidth = 0.5f;
+        NodeWidth = 1.0f;
         PlaneOriginSize = new Vector3(10, 0, 10);
         MapSize.x = PlaneOriginSize.x * transform.localScale.x;
         MapSize.y = PlaneOriginSize.y * transform.localScale.y;
