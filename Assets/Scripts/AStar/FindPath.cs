@@ -43,8 +43,8 @@ public class FindPath : MonoBehaviour
 
         while (openSet.Count > 0)
         {
+            // 找到open中代价最小的节点n
             MapGrid.NodeItem curNode = openSet[0];
-
             for (int i = 0, max = openSet.Count; i < max; i++)
             {
                 /*if (openSet[i].fCost <= curNode.fCost &&
@@ -58,31 +58,33 @@ public class FindPath : MonoBehaviour
                 }
             }
 
+            // 将代价最小的节点从open移到close
             openSet.Remove(curNode);
             closeSet.Add(curNode);
 
-            // 找到的目标节点
+            // n是终点，算法结束，生成路径
             if (curNode == endNode)
             {
                 GeneratePath(startNode, endNode);
                 return;
             }
 
-            // 判断周围节点，选择一个最优的节点
+            // n不是终点
+            // 判断周围节点
             foreach (var item in mapGrid.GetNeibourhood(curNode))
             {
-                // 如果是墙或者已经在关闭列表中
+                // 如果是墙或者已经在close中，跳过
                 if (item.isWall || closeSet.Contains(item))
                 {
                     continue;
                 }
-                // 计算当前相邻节点到开始节点距离
-                int newCost = curNode.gCost + GetDistanceNodes(curNode, item);
+                // 计算当前相邻节点的新起点代价
+                float new_gCost = curNode.gCost + GetDistanceNodes(curNode, item);
                 // 如果距离更小，或者原来不在开始列表中
-                if (newCost < item.gCost || !openSet.Contains(item))
+                if (new_gCost < item.gCost || !openSet.Contains(item))
                 {
                     // 更新与开始节点的距离
-                    item.gCost = newCost;
+                    item.gCost = new_gCost;
                     // 更新与终点的距离
                     item.hCost = GetDistanceNodes(item, endNode);
                     // 更新父节点为当前选定的节点
@@ -96,6 +98,7 @@ public class FindPath : MonoBehaviour
             }
         }
 
+        // 没找到路径
         GeneratePath(startNode, null);
     }
 
@@ -122,23 +125,24 @@ public class FindPath : MonoBehaviour
         
     }
 
-    // 获取两个节点之间的距离
-    private int GetDistanceNodes(MapGrid.NodeItem a, MapGrid.NodeItem b)
+    // 获取两个节点之间的代价(对角距离)
+    private float GetDistanceNodes(MapGrid.NodeItem a, MapGrid.NodeItem b)
     {
-        int cntX = Mathf.Abs(a.x - b.x);
-        int cntZ = Mathf.Abs(a.z - b.z);
-        // 判断到底是那个轴相差的距离更远
+        float cntX = Mathf.Abs(a.x - b.x);
+        float cntZ = Mathf.Abs(a.z - b.z);
+        
         if (cntX > cntZ)
         {
-            return 14 * cntZ + 10 * (cntX - cntZ);
+            return 1.4f * cntZ + (cntX - cntZ);
         }
         else
         {
-            return 14 * cntX + 10 * (cntZ - cntX);
+            return 1.4f * cntX + (cntZ - cntX);
         }
     }
 
-    // 更新路径
+    // Debug
+    // 显示路径
     private void UpdatePath(List<MapGrid.NodeItem> Path)
     {
         int curListSize = pathObj.Count;

@@ -19,16 +19,16 @@ public class MapGrid : MonoBehaviour
         public bool isWall;
         // 位置
         public Vector3 pos;
-        // 格子坐标
+        // 节点下标
         public int x, z;
 
         // 与起点的长度
-        public int gCost;
+        public float gCost;
         // 与目标点的长度
-        public int hCost;
+        public float hCost;
 
         // 总的路径长度
-        public int fCost
+        public float fCost
         {
             get { return gCost + hCost; }
         }
@@ -46,6 +46,7 @@ public class MapGrid : MonoBehaviour
     }
     // 二维数组,保存整个地图结点信息
     private NodeItem[,] mapGrid;
+    // 节点数量
     private int w, h;
 
     //private GameObject WallRange;

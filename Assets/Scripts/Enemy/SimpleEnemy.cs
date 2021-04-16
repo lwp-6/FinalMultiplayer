@@ -35,7 +35,7 @@ public class SimpleEnemy : Enemy
     protected override void Died()
     {
         isDied = true;
-        EnemyAnimator.Play("FallingBack");
+        EnemyAnimator.SetBool("isDied", true);
         gameLevelController.EnemyNum--;
         Destroy(gameObject, 3);
     }

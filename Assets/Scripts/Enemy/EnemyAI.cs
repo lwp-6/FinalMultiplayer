@@ -11,7 +11,7 @@ public class EnemyAI : Enemy
     public AudioClip ShootingAudioClip;
 
     private int OriginHp;
-    private bool isGetDamage;
+    //private bool isGetDamage;
 
     // 巡逻数据
     private List<Transform> Map;
@@ -39,11 +39,11 @@ public class EnemyAI : Enemy
         hpManager = gameObject.transform.GetChild(0).GetComponent<HPManager>();
         LookAt_fix = new Vector3(0, 1.6f, 0);
         isDamage = true;
-        SightRange = 15.0f;
+        SightRange = 25.0f;
         SightAngle = 90.0f;
         SoundRange = 15.0f;
         OriginHp = hpManager.HP;
-        isGetDamage = false;
+        //isGetDamage = false;
         CurrentState = GlobleVar.EnemyState.Idle;
         ChaseTime = 8.0f;
         AttackDistance = 10.0f;
@@ -135,7 +135,7 @@ public class EnemyAI : Enemy
                     {
                         Timer = ChaseTime;
                         CurrentState = GlobleVar.EnemyState.Patrol;
-                        isGetDamage = false;
+                        //isGetDamage = false;
                     }
                     else
                     {
@@ -170,7 +170,7 @@ public class EnemyAI : Enemy
     {
         isDied = true;
         //agent.isStopped = true;
-        EnemyAnimator.Play("FallingBack");
+        EnemyAnimator.SetBool("isDied", true);
         gameLevelController.EnemyNum--;
         Destroy(gameObject, 3);
     }
@@ -314,7 +314,7 @@ public class EnemyAI : Enemy
     {
         if (OriginHp > hpManager.HP)
         {
-            isGetDamage = true;
+            //isGetDamage = true;
             OriginHp = hpManager.HP;
             return true;
         }
